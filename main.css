@@ -1,0 +1,429 @@
+@font-face{
+    font-family: poppins;
+    src: url(./fonts/Poppins-Regular.ttf)
+    format(truetype);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: poppins;
+}
+:root{
+    --left-bar-color-:#F9FAFB;
+    --hover-color-: #e5e8eb;
+    --orange-: #FFC831;
+    --input-color-: #F3F5F7;
+    --text-color-: #637381;
+    --text-hover-: #4e5b69;
+    --text-selected-: #212B36;
+    --right-bar-color-: #ffffff;
+    --dark-text-: #000;
+    --light-text-: #fff;
+    --product-img-: #fafafd;
+    --product-img-hover-: #e1e4e9;
+}
+
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+button{
+    cursor: pointer;
+}
+
+.main-container{
+    display: flex;
+}
+.left-bar{
+    min-width: 300px;
+    background: var(--left-bar-color-);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+.left-bar-top{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.left-header{
+    display: flex;
+    padding: 24px 26px 24px 32px;
+    align-items: center;
+    justify-content: space-between;
+}
+.left-header div{
+    padding: 5px 6px 4px 8px;
+    border-radius: 15px;
+}
+.left-header div:hover{
+    background: var(--hover-color-);
+}
+.nav-list{
+    cursor: pointer;
+}
+.navi{
+    padding: 12px 32px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: var(--text-color-);
+    border-bottom-right-radius: 22px;
+    border-top-right-radius: 22px;
+}
+.navi:hover{
+    background: var(--hover-color-);
+}
+.selected-li{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.inside-ul li{
+    padding: 10px;
+    font-size: 15px;
+    width: 190px;
+    border-bottom-right-radius: 22px;
+    border-top-right-radius: 22px;
+    color: var(--text-color-);
+}
+.inside-ul li:hover{
+    background: var(--hover-color-);
+    color: var(--orange-);
+}
+.disco{
+    padding-left: 40px;
+    display: flex;
+    gap: 25px;
+    display: none;
+}
+.nimadir{
+    display: flex;
+    gap: 30px;
+    padding: 5px 10px 5px 38px;
+    overflow: hidden;
+}
+.line{
+    position: relative;
+    width: 5px;
+    background: linear-gradient(
+        to right, 
+        transparent 0%,
+        transparent 25%, 
+        #919EAB 25%,
+        #919EAB 75%, 
+        transparent 75%,
+        transparent 100%);
+}
+.selected-li{
+    cursor: pointer;
+}
+.indicator{
+    position: absolute;
+    top: -50px;
+    z-index: 1;
+    transition: top 0.4s ease;
+    width: 5px;
+    height: 45px;
+    background: linear-gradient(
+        to top, 
+        transparent 0%,
+        transparent 30%,
+        var(--orange-) 30%,
+        var(--orange-) 70%,
+        transparent 70%, 
+        transparent 100%
+    );
+}
+
+.left-bar-bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.bottom-ul li{
+    padding: 12px 32px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: var(--text-color-);
+    border-bottom-right-radius: 22px;
+    border-top-right-radius: 22px;
+}
+.bottom-ul li:hover{
+    background: var(--hover-color-);
+}
+.bottom-info{
+    display: flex;
+    flex-direction: column;
+    padding: 16px 52px;
+    gap: 8px;
+}
+.bottom-a{
+    display: flex;
+    justify-content: space-between;
+}
+.bottom-a a{
+    font-size: 14px;
+    color: var(--text-color-);
+    padding: 2px 7px;
+}
+.bottom-a a:hover{
+    background: var(--hover-color-);
+}
+.bottom-info p{
+    font-size: 15px;
+    text-align: center;
+    color: var(--text-color-);
+}
+.bottom-hr{
+    border: var(--text-color-) 1px solid;
+}
+
+
+/* right bar */
+.right-bar{
+    padding: 24px 28px;
+    background: var(--right-bar-color-);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-nav{
+    display: flex;
+    gap: 24px;
+}
+.header-icons{
+    display: flex;
+    gap: 24px;
+    font-size: 20px;
+    align-items: center;
+    color: var(--text-color-);
+}
+.header-icons i{
+    cursor: pointer;
+}
+.header-icons i:hover{
+    color: var(--text-hover-);
+}
+.header-icons i:active{
+    transform: scale(0.9);
+}
+.bell-ring:active{
+    animation: bell-animation 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes bell-animation{
+    0%{
+        transform: rotate(0deg)
+            scale(1.2);
+    }
+    12%{
+        transform: rotate(-25deg);
+    }
+    25%{
+        transform: rotate(0deg);
+    }
+    37%{
+        transform: rotate(-15deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    62%{
+        transform: rotate(15deg);
+    }
+    75%{
+        transform: rotate(0deg);
+    }
+    87%{
+        transform: rotate(-15deg);
+    }
+    100%{
+        transform: rotate(0deg)
+            scale(1);
+    }
+}
+.header-nav button{
+    width: 160px;
+    height: 44px;
+    border-radius: 22px;
+    font-size: 14px;
+    color: black;
+    border: none;
+    outline: none;
+    background: var(--orange-);
+}
+.header-nav button:hover{
+    background-color: #e6b327;
+}
+.header-nav button:active{
+    transform: scale(0.98);
+}
+.input-bar{
+    width: 280px;
+    height: 44px;
+    background: var(--input-color-);
+    border-radius: 22px;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+.input-bar:hover{
+    background: var(--product-img-hover-);
+}
+.input-bar i{
+    color: var(--text-color-);
+}
+.input-bar input{
+    width: 180px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: var(--dark-text-);
+}
+.main-text{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.main-text p{
+    font-size: 14px;
+    color: var(--text-color-);
+}
+.main-text h2{
+    font-size: 18px;
+    color: var(--dark-text-);
+}
+.filtering-pro{
+    display: flex;
+    justify-content: space-between;
+}
+.filtering-pro li{
+    padding: 6px 15px;
+    background: var(--input-color-);
+    border-radius: 20px;
+    color: var(--text-color-);
+    font-size: 14px;
+    cursor: pointer;
+}
+.filtering-pro li:hover{
+    background: var(--dark-text-);
+    color: var(--light-text-);
+}
+
+
+.notFound{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: absolute;
+    top: 80px;
+    left: 380px;
+}
+.notFound img{
+    width: 250px;
+}
+.notFound p{
+    font-size: 20px;
+    color: var(--dark-text-);
+    align-items: center;
+}
+.product-list{
+    display: grid;
+    grid-template-columns: 358px 358px 358px;
+    justify-content: space-between;
+    row-gap: 26px;
+    position: relative;
+}
+.product-card{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.product-img{
+    width: 356px;
+    height: 236px;
+    background: var(--product-img-);
+}
+.product-img:hover{
+    background: var(--product-img-hover-);
+}
+.product-info{
+    display: flex;
+    gap: 17px;
+}
+.product-rest{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.product-bottom{
+    display: flex;
+    position: relative;
+    width: 314px;
+}
+.price-tag{
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-color-);
+}
+.current-price{
+    color: var(--orange-);
+}
+.star-tag{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-color-);
+}
+.star-tag div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.product-title{
+    display: flex;
+    flex-direction: column;
+}
+.product-title h2{
+    font-size: 14px;
+    color: var(--dark-text-);
+}
+.product-title p{
+    font-size: 14px;
+    color: var(--text-color-);
+}
+.product-cart{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: var(--input-color-);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.product-cart:hover{
+    background: var(--hover-color-);
+}
