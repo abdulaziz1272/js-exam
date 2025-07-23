@@ -24,7 +24,9 @@
     --product-img-: #fafafd;
     --product-img-hover-: #e1e4e9;
 }
-
+body{
+    overflow-y: scroll;
+}
 li{
     list-style: none;
 }
@@ -125,7 +127,7 @@ button{
 }
 .indicator{
     position: absolute;
-    top: -50px;
+    /* top: -50px; */
     z-index: 1;
     transition: top 0.4s ease;
     width: 5px;
@@ -383,6 +385,7 @@ header{
     display: flex;
     gap: 8px;
     font-size: 14px;
+    font-weight: 600;
     color: var(--text-color-);
 }
 .current-price{
@@ -426,4 +429,309 @@ header{
 }
 .product-cart:hover{
     background: var(--hover-color-);
+}
+
+
+.best-author{
+    position: fixed;
+    top: 120px;
+    left: 550px;
+    z-index: 11;
+    background: var(--hover-color-);
+    width: 400px;
+    height: 500px;
+    border: 2px solid var(--text-hover-);
+    padding: 40px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
+.x-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    color: var(--dark-text-);
+}
+.x-btn:hover{
+    background: rgb(239, 50, 50);
+    color: white;
+}
+.x-btn:active{
+    transform: scale(.98)
+        rotate(45deg);
+}
+.best-author h2{
+    font-size: 36px;
+    text-align: center;
+    color: var(--dark-text-);
+}
+.author-li li{
+    padding: 11.2px 15px;
+    border: solid 1px var(--text-hover-);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--dark-text-);
+}
+.overlayer{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+}
+
+
+.feed{
+    position: fixed;
+    top: 120px;
+    left: 550px;
+    z-index: 11;
+    background: var(--hover-color-);
+    width: 400px;
+    height: 500px;
+    border: 2px solid var(--text-hover-);
+    padding: 60px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    display: none;
+}
+
+
+
+/* mains */
+.feed-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+}
+.feed-load{
+    display: none;
+}
+.feed-thank{
+    display: none;
+}
+/* mains */
+
+
+
+.feed-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    color: var(--dark-text-);
+}
+.feed-btn:hover{
+    background: rgb(239, 50, 50);
+    color: white;
+}
+.feed-btn:active{
+    transform: scale(.98)
+        rotate(45deg);
+}
+.feed-main h2{
+    width: 300px;
+    font-size: 34px;
+    text-align: center;
+    color: var(--dark-text-);
+}
+#feed-text{
+    width: 350px;
+    height: 250px;
+    border: var(--dark-text-);
+    outline: none;
+    font-size: 18px;
+    padding: 10px;
+    overflow: hidden;
+    background: var(--product-img-);
+    color: var(--dark-text-);
+}
+.send-btn{
+    width: 100px;
+    height: 35px;
+    border: none;
+    outline: none;
+    background: rgb(68, 220, 68);
+    border-radius: 5px;
+    transform: translateX(123px);
+    color: white;
+    font-size: 18px;
+}
+.send-btn:hover{
+    background: rgb(41, 198, 41);
+}
+.send-btn:active{
+    transform: scale(0.98)
+        translateX(127px);
+}
+
+
+.feed-load{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    top: 140px;
+    background-color: var(--dark-text-);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.filler{
+    width: 65px;
+    height: 65px;
+    background: var(--hover-color-);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.space1{
+    position: absolute;
+    background: var(--hover-color-);
+    width: 40px;
+    height: 40px;
+    left: 0px;
+    top: 0;
+}
+.space2{
+    position: absolute;
+    background: var(--hover-color-);
+    width: 40px;
+    height: 40px;
+    left: -8px;
+    top: 12px;
+    transform: rotate(-30deg);
+}
+.dot{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: black;
+}
+
+.feed-thank{
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+    font-weight: 600;
+    top: 100px;
+    color: var(--dark-text-);
+}
+.feed-last{
+    position: absolute;
+    top: -150px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    color: var(--dark-text-);
+}
+.feed-last:hover{
+    background: rgb(239, 50, 50);
+    color: white;
+}
+.feed-last:active{
+    transform: scale(.98)
+        rotate(45deg);
+}
+
+
+.contact{
+    position: fixed;
+    top: 120px;
+    left: 550px;
+    z-index: 11;
+    background: var(--hover-color-);
+    width: 400px;
+    height: 500px;
+    border: 2px solid var(--text-hover-);
+    padding: 60px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    display: none;
+}
+.contact-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    color: var(--dark-text-);
+}
+.contact-btn:hover{
+    background: rgb(239, 50, 50);
+    color: white;
+}
+.contact-btn:active{
+    transform: scale(.98)
+        rotate(45deg);
+}
+.contact h2{
+    width: 350px;
+    font-size: 30px;
+    text-align: center;
+    color: var(--dark-text-);
+}
+.contact-li{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-evenly;
+    width: 100%;
+    row-gap: 40px;
+}  
+.contact-li li a{
+    font-size: 50px;
+    color: var(--dark-text-);
 }

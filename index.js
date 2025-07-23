@@ -311,6 +311,10 @@ const leftBars = [
     {
         barImgClass: "fa-solid fa-house",
         barText: "Home",
+        functionName: "home",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     },
     {
         barImgClass: "fa-solid fa-house navi-icon",
@@ -320,36 +324,63 @@ const leftBars = [
             "Clothes",
             "Gaming",
             "Grocery",
-        ]
+        ],
+        functionName: "discover",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     },
     {
         barImgClass: "fa-solid fa-box",
         barText: "Popular Products",
+        functionName: "popularity",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     },
     {
         barImgClass: "fa-solid fa-user",
         barText: "Top Authors",
+        functionName: "topAuthors",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     },
     {
         barImgClass: "fa-solid fa-square-rss",
         barText: "Feed",
+        functionName: "feed",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     },
     {
         barImgClass: "fa-solid fa-headset",
         barText: "Contact",
+        functionName: "contact",
+        onclickFunc(){
+            decider(this.functionName)
+        },
     }
 ]
 
 
 class LeftBar {
-    constructor(barImgClass, barText, barChild) {
+    constructor(barImgClass, barText, barChild, functionName, onclickFunc,) {
         this.barImgClass = barImgClass;
         this.barText = barText;
         this.barChild = barChild;
+        this.functionName = functionName;
+        this.onclickFunc = onclickFunc;
+
+        this.liContainer = null;
     }
     display() {
         const li = document.createElement("li");
         li.className = "nav-list";
+        li.addEventListener("click", () => {
+            this.onclickFunc(this.functionName);
+        })
 
         const mainDiv = document.createElement("div");
         mainDiv.className = "navi";
@@ -361,10 +392,10 @@ class LeftBar {
 
         // If has children
         if (this.barChild) {
-            const liContainer = document.createElement("div");
-            liContainer.className = "nimadir"
-            liContainer.innerHTML = `<div class="line"><div class="indicator"></div></div>`
-            liContainer.style.display = "none"
+            this.liContainer = document.createElement("div");
+            this.liContainer.className = "nimadir"
+            this.liContainer.innerHTML = `<div class="line"><div class="indicator"></div></div>`
+            this.liContainer.style.display = "none"
 
             const childList = document.createElement("ul");
             childList.className = "inside-ul";
@@ -374,7 +405,8 @@ class LeftBar {
                 childLi.className = "selected-li";
                 childLi.textContent = childText;
 
-                childLi.addEventListener("click", () => {
+                childLi.addEventListener("click", (e) => {
+                    e.stopPropagation()
                     filterByCategory(childText);
                 });
 
@@ -382,21 +414,31 @@ class LeftBar {
             });
 
             // Toggle visibility on click
-            mainDiv.addEventListener("click", () => {
-                liContainer.style.display = liContainer.style.display === "none" ? "flex" : "none";
+            mainDiv.addEventListener("click", (e) => {
+                e.stopPropagation();
+                this.liContainer.style.display = this.liContainer.style.display === "none" ? "flex" : "none";
+                discovery();
             });
 
-            liContainer.appendChild(childList)
-            li.appendChild(liContainer);
+            this.liContainer.appendChild(childList)
+            li.appendChild(this.liContainer);
 
         }
         return li;
     }
 }
 
+function hideAllLiContainers() {
+    document.querySelectorAll(".nimadir").forEach(container => {
+        container.style.display = "none";
+    });
+}
+
+
+
 const leftNav = document.querySelector(".left-nav-bar");
 leftBars.forEach(obj => {
-    const leftBar = new LeftBar(obj.barImgClass, obj.barText, obj.barChild);
+    const leftBar = new LeftBar(obj.barImgClass, obj.barText, obj.barChild, obj.functionName, obj.onclickFunc,);
     leftNav.appendChild(leftBar.display())
 })
 const submenuItems = document.querySelectorAll(".selected-li");
@@ -408,7 +450,6 @@ submenuItems.forEach((item, index) => {
         indicator.style.transition = "top 0.4s ease"
         indicator.style.top = `${offset - 209}px`;
 
-        // Optional: make only one item bold/active
         submenuItems.forEach(i => i.classList.remove("active"));
         item.classList.add("active");
     });
@@ -433,7 +474,6 @@ function leftNavDisplay() {
                 const offset = item.offsetTop;
                 indicator.style.top = `${offset - 209}px`;
 
-                // Optional: make only one item bold/active
                 submenuItems.forEach(i => i.classList.remove("active"));
                 item.classList.add("active");
             });
@@ -441,10 +481,6 @@ function leftNavDisplay() {
         leftNavIsVisible = true;
     }
 }
-
-
-
-
 
 
 function proDisplay() {
@@ -471,27 +507,27 @@ function proDisplay() {
             const div = document.createElement("div");
             div.className = "product-card";
             div.innerHTML = `
-            <div class="product-img">
-                <img src="${this.productImg}">
-            </div>
+                <div class="product-img">
+                    <img src="${this.productImg}">
+                </div>
 
-            <div class="product-info">
-                <img src="${this.authorImg}" width="25px" height="25px">
-                <div class="product-rest">
-                    <div class="product-title">
-                        <h2>${this.title}</h2>
-                        <p>${this.author}</p>
-                    </div>
-                    <div class="product-bottom">
-                        <div class="product-price">
-                            <div class="price-tag"><span class="current-price">$${this.currentPrice}</span> <del>$${this.salePrice}</del></div>
-                            <div class="star-tag"><span>${this.saleStock} sales</span> <div><img src="${this.star}"> <span>${this.rating}(${this.reviews})</span></div></div>
+                <div class="product-info">
+                    <img src="${this.authorImg}" width="25px" height="25px">
+                    <div class="product-rest">
+                        <div class="product-title">
+                            <h2>${this.title}</h2>
+                            <p>${this.author}</p>
                         </div>
-                        <div class="product-cart"><img src="${this.cart}"></div>
+                        <div class="product-bottom">
+                            <div class="product-price">
+                                <div class="price-tag"><span class="current-price">$${this.currentPrice}</span> <del>$${this.salePrice}</del></div>
+                                <div class="star-tag"><span>${this.saleStock} sales</span> <div><img src="${this.star}"> <span>${this.rating}(${this.reviews})</span></div></div>
+                            </div>
+                            <div class="product-cart"><img src="${this.cart}"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
             return div;
         }
     }
@@ -508,6 +544,12 @@ proDisplay();
 
 // dark mode
 let notFuoundWhite = "2";
+let noLeft = `
+    <div class="notFound">
+        <img src="./site-images/shrug (${notFuoundWhite}).png">
+        <p class="not-found-text">Unfortunately, the product is not found!</p>
+    </div>
+`;
 
 const moonSun = document.querySelector(".night-mode");
 let isNight = false;
@@ -542,15 +584,6 @@ function nightMode() {
 }
 moonSun.addEventListener("click", () => {
     nightMode();
-
-    if(notFuoundWhite == 2){
-        notFuoundWhite = "1";
-    }else{
-        notFuoundWhite = "2";
-    }
-
-    notFoundDisplay();
-    notFoundChange(notFuoundWhite);
 })
 // dark mode
 
@@ -559,7 +592,11 @@ moonSun.addEventListener("click", () => {
 const input = document.querySelector(".search-input");
 const mainDiv = document.querySelector(".product-list");
 
-function notFoundDisplay(){
+function showNoLeft() {
+    mainDiv.innerHTML = noLeft;
+}
+
+function notFoundDisplay() {
     mainDiv.innerHTML = "";
     const searchValue = input.value.toLowerCase().trim();
 
@@ -597,38 +634,43 @@ function notFoundDisplay(){
             mainDiv.appendChild(div);
         });
     } else {
-        function notFoundChange(order){
-            mainDiv.innerHTML = `
-                <div class="notFound">
-                    <img src="./site-images/shrug (${order}).png">
-                    <p class="not-found-text">Unfortunately, the product is not found!</p>
-                </div>
-            `
-        }
-        notFoundChange(notFuoundWhite);
+        showNoLeft()
     }
 }
 
 input.addEventListener("input", () => {
     notFoundDisplay();
 });
+
+moonSun.addEventListener("click", () => {
+
+    notFuoundWhite = notFuoundWhite === "2" ? "1" : "2";
+
+    noLeft = `
+        <div class="notFound">
+            <img src="./site-images/shrug (${notFuoundWhite}).png">
+            <p class="not-found-text">Unfortunately, the product is not found!</p>
+        </div>
+    `;
+})
+
 // filter by input
 
 // filter by type
 
-function filterByType(proType){
-    if(proType == "all"){
+function filterByType(proType) {
+    if (proType == "all") {
         mainDiv.innerHTML = "";
         proDisplay()
-    }else{
+    } else {
         mainDiv.innerHTML = "";
-        const typeFilteredProducts = products.filter(product =>{
+        const typeFilteredProducts = products.filter(product => {
             return product.type.toLowerCase() === proType.toLowerCase();
         });
         console.log(proType)
 
-        if(typeFilteredProducts.length > 0){
-            typeFilteredProducts.forEach(product =>{
+        if (typeFilteredProducts.length > 0) {
+            typeFilteredProducts.forEach(product => {
                 const div = document.createElement("div")
                 div.className = "product-card"
                 div.innerHTML = `
@@ -656,7 +698,7 @@ function filterByType(proType){
                 mainDiv.appendChild(div);
             })
         } else {
-            function notFoundChange(order){
+            function notFoundChange(order) {
                 mainDiv.innerHTML = `
                     <div class="notFound">
                         <img src="./site-images/shrug (${order}).png">
@@ -668,21 +710,20 @@ function filterByType(proType){
         }
 
     }
-    
+
 }
 
 // filter by type
 
 // filter by category
 
-function filterByCategory(proCategory){
+function filterByCategory(proCategory) {
     mainDiv.innerHTML = "";
-    console.log(proCategory)
     const categoryFilteredProducts = products.filter(product => {
         return product.category.toLowerCase() === proCategory.toLowerCase();
     })
 
-    if(categoryFilteredProducts.length > 0){
+    if (categoryFilteredProducts.length > 0) {
         categoryFilteredProducts.forEach(product => {
             const div = document.createElement("div")
             div.className = "product-card"
@@ -711,7 +752,7 @@ function filterByCategory(proCategory){
             mainDiv.appendChild(div);
         });
     } else {
-        function notFoundChange(order){
+        function notFoundChange(order) {
             mainDiv.innerHTML = `
                 <div class="notFound">
                     <img src="./site-images/shrug (${order}).png">
@@ -724,3 +765,253 @@ function filterByCategory(proCategory){
 }
 
 // filter by category
+
+// filter by popularity
+
+function popularity() {
+    mainDiv.innerHTML = "";
+    const filterPopularity = products.filter(product => {
+        return product.reviews >= 300;
+    })
+
+    if (filterPopularity.length > 0) {
+        filterPopularity.forEach(product => {
+            const div = document.createElement("div")
+            div.className = "product-card"
+            div.innerHTML = `
+                <div class="product-img">
+                    <img src="${product.productImg}">
+                </div>
+
+                <div class="product-info">
+                    <img src="${product.authorImg}" width="25px" height="25px">
+                    <div class="product-rest">
+                        <div class="product-title">
+                            <h2>${product.title}</h2>
+                            <p>${product.author}</p>
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-price">
+                                <div class="price-tag"><span class="current-price">$${product.currentPrice}</span> <del>$${product.salePrice}</del></div>
+                                <div class="star-tag"><span>${product.saleStock} sales</span> <div><img src="${product.star}"> <span>${product.rating}(${product.reviews})</span></div></div>
+                            </div>
+                            <div class="product-cart"><img src="${product.cart}"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mainDiv.appendChild(div);
+        });
+    } else {
+        function notFoundChange(order) {
+            mainDiv.innerHTML = `
+                <div class="notFound">
+                    <img src="./site-images/shrug (${order}).png">
+                    <p class="not-found-text">Unfortunately, the product is not found!</p>
+                </div>
+            `
+        }
+        notFoundChange(notFuoundWhite);
+    }
+
+}
+
+// filter by popularity
+
+// press discover
+
+function discovery(){
+    mainDiv.innerHTML = "";
+    const discoveryFilteredProducts = products.filter(product => {
+        return product.category.toLowerCase() === "electronics";
+    })
+
+    if (discoveryFilteredProducts.length > 0) {
+        discoveryFilteredProducts.forEach(product => {
+            const div = document.createElement("div")
+            div.className = "product-card"
+            div.innerHTML = `
+                <div class="product-img">
+                    <img src="${product.productImg}">
+                </div>
+
+                <div class="product-info">
+                    <img src="${product.authorImg}" width="25px" height="25px">
+                    <div class="product-rest">
+                        <div class="product-title">
+                            <h2>${product.title}</h2>
+                            <p>${product.author}</p>
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-price">
+                                <div class="price-tag"><span class="current-price">$${product.currentPrice}</span> <del>$${product.salePrice}</del></div>
+                                <div class="star-tag"><span>${product.saleStock} sales</span> <div><img src="${product.star}"> <span>${product.rating}(${product.reviews})</span></div></div>
+                            </div>
+                            <div class="product-cart"><img src="${product.cart}"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mainDiv.appendChild(div);
+        });
+    } else {
+        function notFoundChange(order) {
+            mainDiv.innerHTML = `
+                <div class="notFound">
+                    <img src="./site-images/shrug (${order}).png">
+                    <p class="not-found-text">Unfortunately, the product is not found!</p>
+                </div>
+            `
+        }
+        notFoundChange(notFuoundWhite);
+    }
+}
+
+// press discover
+
+// press top authors
+const body = document.querySelector("body");
+const authorBar = document.querySelector(".best-author");
+const xBtn = document.querySelector(".x-btn");
+const overlayer = document.querySelector(".overlayer")
+let authorBarIsVisible = false;
+
+function bestAuthors(){
+    if(!authorBarIsVisible){
+        authorBarIsVisible = true;
+        authorBar.style.display = "flex";
+        overlayer.style.display = "block"
+    }
+}
+xBtn.addEventListener("click", () => {
+    authorBarIsVisible = false;
+    authorBar.style.display = "none";
+    overlayer.style.display = "none";
+});
+overlayer.addEventListener("click", () => {
+    authorBarIsVisible = false;
+    authorBar.style.display = "none";
+    overlayer.style.display = "none";
+})
+
+// press top authors
+
+// press feed
+
+const feed = document.querySelector(".feed");
+const feedBtn = document.querySelector(".feed-btn");
+const sendBtn = document.querySelector(".send-btn");
+const feedMain = document.querySelector(".feed-main");
+const feedLoad = document.querySelector(".feed-load");
+const feedThank = document.querySelector(".feed-thank");
+const feedComment = document.querySelector("#feed-text");
+const feedLast = document.querySelector(".feed-last");
+let feedIsVisible = false;
+
+function feedDisplay(){
+    if(!feedIsVisible){
+        feed.style.display = "flex";
+        overlayer.style.display = "block";
+        feedIsVisible = true;
+    }
+}
+
+feedBtn.addEventListener("click", () => {
+    feedIsVisible = false;
+    feed.style.display = "none";
+    overlayer.style.display = "none"
+});
+overlayer.addEventListener("click", () => {
+    feedIsVisible = false;
+    feed.style.display = "none";
+    overlayer.style.display = "none";
+});
+sendBtn.addEventListener("click", () => {
+    let commentValidity = feedComment.value.trim().length;
+
+    if (commentValidity > 0) {
+        feedLoad.style.transition = "none";
+        feedLoad.style.transform = "rotate(0deg)";
+        feedLoad.style.display = "flex";
+        feedMain.style.display = "none";
+
+        requestAnimationFrame(() => {
+            feedLoad.style.transition = "transform 2s linear";
+            feedLoad.style.transform = "rotate(1500deg)";
+        });
+
+        setTimeout(() => {
+            feedLoad.style.display = "none";
+            feedThank.style.display = "block";
+            feedLoad.style.transform = "rotate(0deg)";
+        }, 2000);
+    } else {
+        alert("You need to drop your comment first.");
+    }
+});
+feedLast.addEventListener("click", () =>{
+    feedThank.style.display = "none";
+    feedMain.style.display = "flex";
+    feed.style.display = "none";
+    overlayer.style.display = "none";
+    feedIsVisible = false;
+    feedComment.value = "";
+})
+
+// press feed
+
+// press contact
+const contact = document.querySelector(".contact");
+const contactBtn = document.querySelector(".contact-btn");
+let contactIsVisible = false;
+
+function contactDisplay(){
+    if(!contactIsVisible){
+        contactIsVisible = true;
+        contact.style.display = "flex";
+        overlayer.style.display = "block";
+    }
+}
+contactBtn.addEventListener("click", () => {
+    contactIsVisible = false;
+    contact.style.display = "none";
+    overlayer.style.display = "none";
+})
+overlayer.addEventListener("click", () => {
+    contactIsVisible = false;
+    contact.style.display = "none";
+    overlayer.style.display = "none";
+})
+
+// press contact
+
+// press home
+
+function home(){
+    proDisplay();
+    hideAllLiContainers();
+}
+
+// press home
+
+// decide the function
+
+function decider(name){
+    if(name == "home"){
+        mainDiv.innerHTML = "";
+        home();
+    }else if(name == "discover"){
+        discovery();
+    }else if(name == "popularity"){
+        popularity();
+    }else if(name == "topAuthors"){
+        bestAuthors();
+    }else if(name == "feed"){
+        feedDisplay();
+    }else if(name == "contact"){
+        contactDisplay();
+    }
+}
+
+// decide the function
+
