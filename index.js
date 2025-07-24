@@ -1153,16 +1153,16 @@ function cartListDisplay() {
                     <img src="${this.productImg}">
                 </div>
 
-                <div class="product-info">
+                <div class="product-cart-info">
                     <img src="${this.authorImg}" width="25px" height="25px">
-                    <div class="product-rest">
-                        <div class="product-title">
+                    <div class="product-cart-rest">
+                        <div class="product-cart-title">
                             <h2>${this.title}</h2>
                             <p>${this.author}</p>
                         </div>
-                        <div class="product-bottom">
-                            <div class="product-price">
-                                <div class="price-tag"><span class="current-price">$${this.currentPrice}</span> <del>$${this.salePrice}</del></div>
+                        <div class="product-cart-bottom">
+                            <div class="product-cart-price">
+                                <div class="price-cart-tag"><span class="current-cart-price">$${this.currentPrice}</span> <del>$${this.salePrice}</del></div>
                             </div>
                         </div>
                     </div>
