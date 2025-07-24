@@ -121,7 +121,7 @@ const products = [
     {
         id: 8,
         productImg: "./images/Rectangle 15 (7).png",
-        title: "BEATS SOLO PRO 1 Wireless Headphone",
+        title: "BEATS 1 Wireless Headphone",
         currentPrice: 89.99,
         salePrice: 119.99,
         category: "Gaming",
@@ -312,7 +312,7 @@ const leftBars = [
         barImgClass: "fa-solid fa-house",
         barText: "Home",
         functionName: "home",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     },
@@ -326,7 +326,7 @@ const leftBars = [
             "Grocery",
         ],
         functionName: "discover",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     },
@@ -334,7 +334,7 @@ const leftBars = [
         barImgClass: "fa-solid fa-box",
         barText: "Popular Products",
         functionName: "popularity",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     },
@@ -342,7 +342,7 @@ const leftBars = [
         barImgClass: "fa-solid fa-user",
         barText: "Top Authors",
         functionName: "topAuthors",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     },
@@ -350,7 +350,7 @@ const leftBars = [
         barImgClass: "fa-solid fa-square-rss",
         barText: "Feed",
         functionName: "feed",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     },
@@ -358,7 +358,7 @@ const leftBars = [
         barImgClass: "fa-solid fa-headset",
         barText: "Contact",
         functionName: "contact",
-        onclickFunc(){
+        onclickFunc() {
             decider(this.functionName)
         },
     }
@@ -482,6 +482,7 @@ function leftNavDisplay() {
     }
 }
 
+const addedProducts = [];
 
 function proDisplay() {
     class Product {
@@ -528,6 +529,17 @@ function proDisplay() {
                     </div>
                 </div>
             `;
+            const cartCountDisplay = document.querySelector(".cart-count");
+            div.querySelector(".product-cart").addEventListener("click", () => {
+                const alreadyAdded = addedProducts.some(p => p.id === this.id);
+                if (!alreadyAdded) {
+                    addedProducts.push(this);
+                }
+                let cartCount = addedProducts.length;
+                console.log(cartCount)
+                cartCountDisplay.textContent = cartCount;
+            });
+
             return div;
         }
     }
@@ -631,6 +643,17 @@ function notFoundDisplay() {
                     </div>
                 </div>
             `;
+            const cartCountDisplay = document.querySelector(".cart-count");
+            div.querySelector(".product-cart").addEventListener("click", () => {
+                const alreadyAdded = addedProducts.some(p => p.id === product.id);
+                if (!alreadyAdded) {
+                    addedProducts.push(product);
+                }
+
+                let cartCount = addedProducts.length;
+                console.log(cartCount);
+                cartCountDisplay.textContent = cartCount;
+            });
             mainDiv.appendChild(div);
         });
     } else {
@@ -695,6 +718,17 @@ function filterByType(proType) {
                         </div>
                     </div>
                 `;
+                const cartCountDisplay = document.querySelector(".cart-count");
+                div.querySelector(".product-cart").addEventListener("click", () => {
+                    const alreadyAdded = addedProducts.some(p => p.id === product.id);
+                    if (!alreadyAdded) {
+                        addedProducts.push(product);
+                    }
+
+                    let cartCount = addedProducts.length;
+                    console.log(cartCount);
+                    cartCountDisplay.textContent = cartCount;
+                });
                 mainDiv.appendChild(div);
             })
         } else {
@@ -719,14 +753,15 @@ function filterByType(proType) {
 
 function filterByCategory(proCategory) {
     mainDiv.innerHTML = "";
-    const categoryFilteredProducts = products.filter(product => {
-        return product.category.toLowerCase() === proCategory.toLowerCase();
-    })
+
+    const categoryFilteredProducts = products.filter(product =>
+        product.category.toLowerCase() === proCategory.toLowerCase()
+    );
 
     if (categoryFilteredProducts.length > 0) {
         categoryFilteredProducts.forEach(product => {
-            const div = document.createElement("div")
-            div.className = "product-card"
+            const div = document.createElement("div");
+            div.className = "product-card";
             div.innerHTML = `
                 <div class="product-img">
                     <img src="${product.productImg}">
@@ -749,6 +784,20 @@ function filterByCategory(proCategory) {
                     </div>
                 </div>
             `;
+
+            const cartCountDisplay = document.querySelector(".cart-count");
+            div.querySelector(".product-cart").addEventListener("click", () => {
+                const alreadyAdded = addedProducts.some(p => p.id === product.id);
+                if (!alreadyAdded) {
+                    addedProducts.push(product);
+                }
+
+                let cartCount = addedProducts.length;
+                console.log(cartCount);
+                console.log("hello");
+                cartCountDisplay.textContent = cartCount;
+            });
+
             mainDiv.appendChild(div);
         });
     } else {
@@ -758,11 +807,13 @@ function filterByCategory(proCategory) {
                     <img src="./site-images/shrug (${order}).png">
                     <p class="not-found-text">Unfortunately, the product is not found!</p>
                 </div>
-            `
+            `;
         }
+
         notFoundChange(notFuoundWhite);
     }
 }
+
 
 // filter by category
 
@@ -800,6 +851,17 @@ function popularity() {
                     </div>
                 </div>
             `;
+            const cartCountDisplay = document.querySelector(".cart-count");
+            div.querySelector(".product-cart").addEventListener("click", () => {
+                const alreadyAdded = addedProducts.some(p => p.id === product.id);
+                if (!alreadyAdded) {
+                    addedProducts.push(product);
+                }
+
+                let cartCount = addedProducts.length;
+                console.log(cartCount);
+                cartCountDisplay.textContent = cartCount;
+            });
             mainDiv.appendChild(div);
         });
     } else {
@@ -809,7 +871,7 @@ function popularity() {
                     <img src="./site-images/shrug (${order}).png">
                     <p class="not-found-text">Unfortunately, the product is not found!</p>
                 </div>
-            `
+            `;
         }
         notFoundChange(notFuoundWhite);
     }
@@ -820,7 +882,7 @@ function popularity() {
 
 // press discover
 
-function discovery(){
+function discovery() {
     mainDiv.innerHTML = "";
     const discoveryFilteredProducts = products.filter(product => {
         return product.category.toLowerCase() === "electronics";
@@ -852,6 +914,18 @@ function discovery(){
                     </div>
                 </div>
             `;
+            const cartCountDisplay = document.querySelector(".cart-count");
+            div.querySelector(".product-cart").addEventListener("click", () => {
+                const alreadyAdded = addedProducts.some(p => p.id === product.id);
+                if (!alreadyAdded) {
+                    addedProducts.push(product);
+                }
+
+                let cartCount = addedProducts.length;
+                console.log(cartCount);
+                console.log("hello");
+                cartCountDisplay.textContent = cartCount;
+            });
             mainDiv.appendChild(div);
         });
     } else {
@@ -876,8 +950,8 @@ const xBtn = document.querySelector(".x-btn");
 const overlayer = document.querySelector(".overlayer")
 let authorBarIsVisible = false;
 
-function bestAuthors(){
-    if(!authorBarIsVisible){
+function bestAuthors() {
+    if (!authorBarIsVisible) {
         authorBarIsVisible = true;
         authorBar.style.display = "flex";
         overlayer.style.display = "block"
@@ -908,8 +982,8 @@ const feedComment = document.querySelector("#feed-text");
 const feedLast = document.querySelector(".feed-last");
 let feedIsVisible = false;
 
-function feedDisplay(){
-    if(!feedIsVisible){
+function feedDisplay() {
+    if (!feedIsVisible) {
         feed.style.display = "flex";
         overlayer.style.display = "block";
         feedIsVisible = true;
@@ -949,7 +1023,7 @@ sendBtn.addEventListener("click", () => {
         alert("You need to drop your comment first.");
     }
 });
-feedLast.addEventListener("click", () =>{
+feedLast.addEventListener("click", () => {
     feedThank.style.display = "none";
     feedMain.style.display = "flex";
     feed.style.display = "none";
@@ -965,8 +1039,8 @@ const contact = document.querySelector(".contact");
 const contactBtn = document.querySelector(".contact-btn");
 let contactIsVisible = false;
 
-function contactDisplay(){
-    if(!contactIsVisible){
+function contactDisplay() {
+    if (!contactIsVisible) {
         contactIsVisible = true;
         contact.style.display = "flex";
         overlayer.style.display = "block";
@@ -987,7 +1061,7 @@ overlayer.addEventListener("click", () => {
 
 // press home
 
-function home(){
+function home() {
     proDisplay();
     hideAllLiContainers();
 }
@@ -996,22 +1070,133 @@ function home(){
 
 // decide the function
 
-function decider(name){
-    if(name == "home"){
+function decider(name) {
+    if (name == "home") {
         mainDiv.innerHTML = "";
         home();
-    }else if(name == "discover"){
+    } else if (name == "discover") {
         discovery();
-    }else if(name == "popularity"){
+    } else if (name == "popularity") {
         popularity();
-    }else if(name == "topAuthors"){
+    } else if (name == "topAuthors") {
         bestAuthors();
-    }else if(name == "feed"){
+    } else if (name == "feed") {
         feedDisplay();
-    }else if(name == "contact"){
+    } else if (name == "contact") {
         contactDisplay();
     }
 }
 
 // decide the function
+
+// cart
+
+const cartIcon = document.querySelector(".cart-icon");
+const cartBar = document.querySelector(".cart-bar");
+const cartX = document.querySelector(".cart-x")
+const cartTotal = document.querySelector(".cart-total");
+const cartBuy = document.querySelector(".cart-buy");
+const cartClear = document.querySelector(".cart-clear");
+let cartIsOpen = false;
+
+function cartDisplay() {
+    if (!cartIsOpen) {
+        cartIsOpen = true;
+        cartBar.style.display = "flex";
+        overlayer.style.display = "block";
+        cartListDisplay();
+    }
+}
+cartIcon.addEventListener("click", () => {
+    cartDisplay();
+})
+cartX.addEventListener("click", () => {
+    cartIsOpen = false;
+    cartBar.style.display = "none";
+    overlayer.style.display = "none";
+})
+overlayer.addEventListener("click", () => {
+    cartIsOpen = false;
+    cartBar.style.display = "none";
+    overlayer.style.display = "none";
+})
+
+// cart
+
+// add to cart
+
+function cartListDisplay() {
+    let totalPrice = 0;
+    class CartList {
+        constructor(id, productImg, title, currentPrice, salePrice, category, rating, saleStock, authorImg, author, reviews, star, cart, isAvailable, type) {
+            this.id = id;
+            this.productImg = productImg;
+            this.title = title;
+            this.currentPrice = currentPrice;
+            this.salePrice = salePrice;
+            this.category = category;
+            this.rating = rating;
+            this.saleStock = saleStock;
+            this.authorImg = authorImg;
+            this.author = author;
+            this.reviews = reviews;
+            this.star = star;
+            this.cart = cart;
+            this.isAvailable = isAvailable;
+            this.type = type;
+        }
+        render() {
+            const cartDiv = document.createElement("div");
+            cartDiv.className = "cart-div";
+            cartDiv.innerHTML = `
+                <div class="product-cart-img">
+                    <img src="${this.productImg}">
+                </div>
+
+                <div class="product-info">
+                    <img src="${this.authorImg}" width="25px" height="25px">
+                    <div class="product-rest">
+                        <div class="product-title">
+                            <h2>${this.title}</h2>
+                            <p>${this.author}</p>
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-price">
+                                <div class="price-tag"><span class="current-price">$${this.currentPrice}</span> <del>$${this.salePrice}</del></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            totalPrice += this.currentPrice;
+            console.log(totalPrice)
+
+            return cartDiv;
+        }
+    }
+    const cartContainer = document.querySelector(".cart-container");
+    cartContainer.innerHTML = "";
+
+    addedProducts.forEach(obj => {
+        const cartProducts = new CartList(obj.id, obj.productImg, obj.title, obj.currentPrice, obj.salePrice, obj.category, obj.rating, obj.saleStock, obj.authorImg, obj.author, obj.reviews, obj.star, obj.cart, obj.type);
+        cartContainer.appendChild(cartProducts.render());
+    });
+    console.log(totalPrice)
+    cartTotal.textContent = totalPrice;
+}
+
+cartBuy.addEventListener("click", () => {
+    addedProducts.length = 0;
+    cartListDisplay();
+    const cartCountDisplay = document.querySelector(".cart-count");
+    cartCountDisplay.textContent = 0;
+})
+cartClear.addEventListener("click", () =>{
+    addedProducts.length = 0;
+    cartListDisplay();
+    const cartCountDisplay = document.querySelector(".cart-count");
+    cartCountDisplay.textContent = 0;
+})
+// add to cart
+
 

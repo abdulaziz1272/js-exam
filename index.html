@@ -61,7 +61,7 @@
                     <div class="header-icons">
                         <i class="fa-solid fa-moon night-mode"></i> <!--fa-sun-->
                         <i class="fa-solid fa-bell bell-ring"></i>
-                        <i class="fa-solid fa-basket-shopping"></i>
+                        <i class="fa-solid fa-basket-shopping cart-icon"><span class="cart-count">0</span></i>
                     </div>
                     <button>Become a seller</button>
                     <img src="./site-images/author.svg" alt="-header-author-img" width="44px">
@@ -137,6 +137,18 @@
                     </li>
                 </ul>
             </div>
+            <div class="cart-bar">
+                <button class="cart-x">+</button>
+                <h2 class="cart-h2">Your added products</h2>
+                <div class="cart-container"></div>
+                <div class="cart-footer">
+                    <p>Your total: $<span class="cart-total">0</span></p>
+                    <div class="cart-buttons">
+                        <button class="cart-clear">Clear all</button>
+                        <button class="cart-buy">Purchase all</button>
+                    </div>
+                </div>
+            </div>
             <div class="product-list"></div>
         </div>
 
@@ -147,3 +159,4 @@
 </body>
 
 </html>
+<!-- 320px, 480px, 580, 768px, 980px -->
