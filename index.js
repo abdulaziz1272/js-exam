@@ -530,7 +530,7 @@ function proDisplay() {
                 </div>
             `;
             const cartCountDisplay = document.querySelector(".cart-count");
-            div.querySelector(".product-cart").addEventListener("click", () => {
+            div.querySelector(".product-cart").addEventListener("click", (e) => {
                 const alreadyAdded = addedProducts.some(p => p.id === this.id);
                 if (!alreadyAdded) {
                     addedProducts.push(this);
@@ -538,6 +538,39 @@ function proDisplay() {
                 let cartCount = addedProducts.length;
                 console.log(cartCount)
                 cartCountDisplay.textContent = cartCount;
+
+
+                // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
             });
 
             return div;
@@ -653,6 +686,39 @@ function notFoundDisplay() {
                 let cartCount = addedProducts.length;
                 console.log(cartCount);
                 cartCountDisplay.textContent = cartCount;
+
+
+                // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
             });
             mainDiv.appendChild(div);
         });
@@ -728,6 +794,39 @@ function filterByType(proType) {
                     let cartCount = addedProducts.length;
                     console.log(cartCount);
                     cartCountDisplay.textContent = cartCount;
+
+                    // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
+
                 });
                 mainDiv.appendChild(div);
             })
@@ -796,6 +895,39 @@ function filterByCategory(proCategory) {
                 console.log(cartCount);
                 console.log("hello");
                 cartCountDisplay.textContent = cartCount;
+
+                // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
+
             });
 
             mainDiv.appendChild(div);
@@ -861,6 +993,38 @@ function popularity() {
                 let cartCount = addedProducts.length;
                 console.log(cartCount);
                 cartCountDisplay.textContent = cartCount;
+
+                // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
             });
             mainDiv.appendChild(div);
         });
@@ -925,6 +1089,38 @@ function discovery() {
                 console.log(cartCount);
                 console.log("hello");
                 cartCountDisplay.textContent = cartCount;
+
+                // move
+
+                const icon = div.querySelector(".product-cart");
+                const iconRect = icon.getBoundingClientRect();
+                const cartIcon = document.querySelector(".cart-icon");
+                const cartRect = cartIcon.getBoundingClientRect();
+
+                const flyIcon = icon.cloneNode(true);
+                flyIcon.classList.add('fly-icon');
+                document.body.appendChild(flyIcon);
+
+                flyIcon.style.left = (iconRect.left + window.scrollX) + 'px';
+                flyIcon.style.top = (iconRect.top + window.scrollY) + 'px';
+
+                getComputedStyle(flyIcon).transform;
+
+                flyIcon.style.transform = 'scale(5)';
+
+                setTimeout(() => {
+                    const deltaX = cartRect.left - iconRect.left;
+                    const deltaY = cartRect.top - iconRect.top;
+
+                    flyIcon.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
+                    flyIcon.style.opacity = '0.2';
+                }, 300); 
+
+                setTimeout(() => {
+                    flyIcon.remove();
+                }, 1000); 
+
+                // move
             });
             mainDiv.appendChild(div);
         });
@@ -1199,4 +1395,8 @@ cartClear.addEventListener("click", () =>{
 })
 // add to cart
 
+// scale and move
 
+
+
+// scale and move
